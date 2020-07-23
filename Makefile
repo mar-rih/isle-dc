@@ -34,6 +34,11 @@ ifeq ($(INCLUDE_TRAEFIK_SERVICE), true)
 	TRAEFIK_SERVICE := traefik
 endif
 
+# The service portainer may be optional if we are sharing one from another project.
+ifeq ($(INCLUDE_PORTAINER_SERVICE), true)
+	PORTAINER_SERVICE := traefik
+endif
+
 # etcd is an optional dependency, by default it is not included.
 ifeq ($(INCLUDE_ETCD_SERVICE), true)
 	ETCD_SERVICE := etcd
@@ -70,7 +75,7 @@ OVERRIDE_SERVICE_ENVIRONMENT_VARIABLES=$(shell \
 # The services to be run (order is important), as services can override one
 # another. Traefik must be last if included as otherwise its network 
 # definition for `gateway` will be overriden.
-SERVICES := $(REQUIRED_SERIVCES) $(WATCHTOWER_SERVICE) $(ETCD_SERVICE) $(DATABASE_SERVICES) $(ENVIRONMENT) $(TRAEFIK_SERVICE) $(OVERRIDE_SERVICE_ENVIRONMENT_VARIABLES)
+SERVICES := $(REQUIRED_SERIVCES) $(WATCHTOWER_SERVICE) $(ETCD_SERVICE) $(DATABASE_SERVICES) $(ENVIRONMENT) $(TRAEFIK_SERVICE) $(PORTAINER_SERVICE) $(OVERRIDE_SERVICE_ENVIRONMENT_VARIABLES) 
 
 default: download-default-certs docker-compose.yml pull
 
