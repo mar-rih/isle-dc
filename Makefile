@@ -36,7 +36,7 @@ endif
 
 # The service portainer may be optional if we are sharing one from another project.
 ifeq ($(INCLUDE_PORTAINER_SERVICE), true)
-	PORTAINER_SERVICE := traefik
+	PORTAINER_SERVICE := portainer
 endif
 
 # etcd is an optional dependency, by default it is not included.
