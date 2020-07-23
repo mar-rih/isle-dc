@@ -13,7 +13,7 @@ services:
     container_name: isle-portainer
     command: -H unix:///var/run/docker.sock --no-auth
     networks:
-      - isle-internal
+      - gateway
     ports:
       - "9010:9000" ## Remapped to avoid conflicts on systems/servers with portainer already running.
     volumes:
