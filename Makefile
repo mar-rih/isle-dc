@@ -19,7 +19,7 @@ SITE?=default
 export
 
 # Services that are not produced by isle-buildkit.
-EXTERNAL_SERVICES := etcd watchtower traefik
+EXTERNAL_SERVICES := etcd watchtower traefik portainer
 
 # The minimal set of docker-compose files required to be able to run anything.
 REQUIRED_SERIVCES ?= activemq alpaca blazegraph cantaloupe crayfish crayfits drupal fcrepo mariadb matomo solr
