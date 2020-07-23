@@ -4,6 +4,9 @@ version: '3.7'
 ## Demo Environment - Used for exploring a full sandboxed ISLE system with an un-themed Islandora / Drupal site.
 ## Updated 2020-05 - Release 1.5.0 (@ 1.5.0)
 
+volumes:
+  isle-portainer-data:
+
 services:
   portainer: ## Renamed to avoid conflicts on systems/servers with portainer already running.
     image: portainer/portainer
