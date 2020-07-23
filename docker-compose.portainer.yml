@@ -7,7 +7,7 @@ version: '3.7'
 services:
   portainer: ## Renamed to avoid conflicts on systems/servers with portainer already running.
     image: portainer/portainer
-    container_name: isle-portainer-${CONTAINER_SHORT_ID}
+    container_name: isle-portainer
     command: -H unix:///var/run/docker.sock --no-auth
     networks:
       - isle-internal
@@ -18,9 +18,8 @@ services:
       - isle-portainer-data:/data
     labels:
       - traefik.port=9000
-      - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
+      - traefik.docker.network=gateway
       ## Enabling access the Portainer interface via traefik is not safe in a production environment unless
       ## you have the ISLE system behind a firewall and, overall, only ports 80 and 443 exposed.
       - traefik.enable=true
-      - "traefik.frontend.rule=Host:portainer.${BASE_DOMAIN};"
-
+      - traefik.http.routers.api.service=api@internal
