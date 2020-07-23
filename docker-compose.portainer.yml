@@ -1,0 +1,26 @@
+version: '3.7'
+
+#### docker-compose up -d;
+## Demo Environment - Used for exploring a full sandboxed ISLE system with an un-themed Islandora / Drupal site.
+## Updated 2020-05 - Release 1.5.0 (@ 1.5.0)
+
+services:
+  isle-portainer: ## Renamed to avoid conflicts on systems/servers with portainer already running.
+    image: portainer/portainer
+    container_name: isle-portainer-${CONTAINER_SHORT_ID}
+    command: -H unix:///var/run/docker.sock --no-auth
+    networks:
+      - isle-internal
+    ports:
+      - "9010:9000" ## Remapped to avoid conflicts on systems/servers with portainer already running.
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - isle-portainer-data:/data
+    labels:
+      - traefik.port=9000
+      - traefik.docker.network=${COMPOSE_PROJECT_NAME}_isle-internal
+      ## Enabling access the Portainer interface via traefik is not safe in a production environment unless
+      ## you have the ISLE system behind a firewall and, overall, only ports 80 and 443 exposed.
+      - traefik.enable=true
+      - "traefik.frontend.rule=Host:portainer.${BASE_DOMAIN};"
+
