@@ -10,6 +10,8 @@ volumes:
 services:
   cantaloupe:
     image: ${REPOSITORY:-islandora}/cantaloupe:${TAG:-latest}
+    ports:
+      - "8888:80"
     volumes:
       - cantaloupe-data:/data
     labels:
