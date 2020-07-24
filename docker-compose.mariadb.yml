@@ -34,5 +34,5 @@ services:
           #- mariadb-${compose_project_name-isle-dc}.${drupal_site_host-traefik.me}
           #- mariadb-${compose_project_name-isle-dc}-${drupal_site_host-traefik.me}
           - mariadb-${compose_project_name-isle-dc}
-          - mariadb-${compose_project_name-isle-dc}         
+          #- mariadb-${compose_project_name-isle-dc}         
       gateway:
